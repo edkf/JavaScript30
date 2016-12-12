@@ -54,6 +54,16 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 <script>
+	document.addEventListener("DOMContentLoaded", function() {
+		var buttons = document.getElementsByClassName('key');
+		document.onkeypress = function (e) {
+		    e = e || window.event;
+				console.log(e.keyCode);
+				for (var i = 0; i < buttons.length; i++) {
+					var buttonKey = buttons[i].getAttribute("data-key");
+				}
+		};
+	});
 </script>
 </body>
 </html>
