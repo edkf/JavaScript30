@@ -5,8 +5,6 @@
   <title>Document</title>
 </head>
 <body>
-
-
     <div class="clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
@@ -14,8 +12,6 @@
         <div class="hand second-hand"></div>
       </div>
     </div>
-
-
   <style>
     html {
       background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
@@ -24,7 +20,6 @@
       text-align: center;
       font-size: 10px;
     }
-
     body {
       font-size: 2rem;
       display:flex;
@@ -32,7 +27,6 @@
       min-height: 100vh;
       align-items: center;
     }
-
     .clock {
       width: 30rem;
       height: 30rem;
@@ -47,27 +41,44 @@
         inset 0 0 10px black,
         0 0 10px rgba(0,0,0,0.2);
     }
-
     .clock-face {
       position: relative;
       width: 100%;
       height: 100%;
       transform: translateY(-3px); /* account for the height of the clock hands */
     }
-
     .hand {
       width:50%;
       height:6px;
       background:black;
       position: absolute;
       top:50%;
+			transform: rotate(90deg);
+			transform-origin: right;
+			/*transition: .3s ease;*/
     }
-
   </style>
-
   <script>
-
-
+	const hourBar = document.querySelector('.hour-hand');
+	const minutesBar = document.querySelector('.min-hand');
+	const secondBar = document.querySelector('.second-hand');
+	function setTime() {
+		const hours = new Date(); // create a object;
+		
+		const hour = hours.getHours();
+		const hourDegres = ((hour / 12 ) * 360) + 90;
+		
+		const minutes = hours.getMinutes();
+		const minutesDegres = ((minutes / 60 ) * 360) + 90;
+		
+		const seconds = hours.getSeconds();
+		const secondDegres = ((seconds / 60 ) * 360) + 90;
+		
+		hourBar.style.transform = `rotate(${hourDegres}deg)`;
+		minutesBar.style.transform = `rotate(${minutesDegres}deg)`;
+		secondBar.style.transform = `rotate(${secondDegres}deg)`;
+	}
+	setInterval(setTime, 1000);
   </script>
 </body>
 </html>
