@@ -5,6 +5,7 @@
   <title>Array Cardio 💪</title>
 </head>
 <body>
+	<h1 class="h1">Inventors</h1>
   <script>
     // Get your shorts on - this is an array workout!
     // ## Array Cardio Day 1
@@ -27,29 +28,88 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+		const fifteen = inventors.filter(function(inventor){
+			if (inventor.year >= 1500 && inventor.year < 1600) {
+				return true;
+			}
+		})
+		console.table(fifteen);
+		
     // Array.prototype.map()
     // 2. Give us an array of the inventory first and last names
+		const map = inventors.map(function(inventor){
+			return inventor.first + ' ' + inventor.last;
+		})
+		
+		console.log(map);
 
     // Array.prototype.sort()
+		// O método sort() ordena os elementos do próprio array e retorna o array. A ordenação não é necessariamente estável. A ordenação padrão é de acordo com a  pontuação de código unicode.
+
     // 3. Sort the inventors by birthdate, oldest to youngest
+		const sort = inventors.sort(function(a,b) {
+			if (a.year > b.year) {
+				return 1;
+			} else {
+				return -1;
+			}
+		});
+		console.table(sort);
 
     // Array.prototype.reduce()
+		// O método reduce() aplica uma função sobre um acumulador e cada valor do array (da esquerda para direita), deve reduzí-lo a um único valor.
+		
     // 4. How many years did all the inventors live?
+		const reduce = inventors.reduce(function(total, inventor){
+			return total + (inventor.passed - inventor.year);
+		},0)
+		console.log(reduce);
 
     // 5. Sort the inventors by years lived
-
+		const sort2 = inventors.sort(function(a,b) {
+			const olderGuy = a.passed - a.year;
+			const newerGuy = b.passed - b.year;
+			if (olderGuy > newerGuy) {
+				return -1;
+			} else
+				return 1;
+		});
+		
+		console.table(sort2);
+		
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+		
+		// Get the div Block
+		// const contentBlock = document.querySelector('.mw-category');
+		// // Get all links
+		// const linkList = contentBlock.querySelectorAll('a');
+		// // Transform a nodelist to an Array
+		// const aLinkList = Array.from(linkList);
+		// // Show a list of the categories
+		// const showItems = aLinkList
+		// 	.map(function(item){return item.textContent})
+		// 	// filter only that has in the array "de"
+		// 	.filter(function(street){return street.includes('de')})
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+		const lastNameOrder = people.sort(function(a,b){
+			const [last,first] = a.split(', ').reverse();
+			// console.dir(last,first);
+		});
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const joinCars = data.reduce(function(obj, item) {
+      if(!obj[item]){
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+    console.log(joinCars);
   </script>
 </body>
 </html>
