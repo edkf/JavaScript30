@@ -128,8 +128,18 @@
     const panels = document.querySelector('.panels');
     const items = panels.querySelectorAll('.panel');
     items.forEach(item => item.addEventListener('click', openItem));
+    let lastOpen ;
     function openItem(){
-      this.classList.toggle('open');
+      lastOpen = panels.querySelector('.panel.open');
+      if(lastOpen) {
+        lastOpen.classList.remove('open');
+      }
+      
+      if(this === lastOpen){
+        lastOpen.classList.remove('open');
+      } else {
+        this.classList.toggle('open');
+      }
     };
   </script>
 
