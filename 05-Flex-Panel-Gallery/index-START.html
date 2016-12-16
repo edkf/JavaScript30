@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Flex Panels 💪</title>
-  <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,900" rel="stylesheet" />
 </head>
 <body>
   <style>
     html {
       box-sizing: border-box;
       background:#ffc600;
-      font-family:'helvetica neue';
+      font-family: 'Source Sans Pro', sans-serif;
       font-size: 20px;
       font-weight: 200;
     }
@@ -22,13 +22,21 @@
     }
 
     .panels {
+			display: flex;
       min-height:100vh;
       overflow: hidden;
+			cursor: pointer;
     }
 
     .panel {
+			min-height: 100vh;
+			display: flex;
+			justify-content: space-between;
+			flex-direction: column;
+			flex: 1;
       background:#6B0F9C;
-      box-shadow:inset 0 0 0 5px rgba(255,255,255,0.1);
+			padding: 50px 0;
+      /*box-shadow:inset 0 0 0 5px rgba(255,255,255,0.1);*/
       color:white;
       text-align: center;
       align-items:center;
@@ -57,17 +65,28 @@
     }
 
     .panel p {
-      text-transform: uppercase;
-      font-family: 'Amatic SC', cursive;
-      text-shadow:0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
-      font-size: 2em;
+			letter-spacing: -0.5px;
+			text-transform: uppercase;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 1em;
+			font-weight: 300;
+			text-shadow: 0 1px 1px rgba(0,0,0,0.34);
+      transition: .3s ease;
+      opacity: 0;
     }
     .panel p:nth-child(2) {
       font-size: 4em;
+			font-weight: 900;
+      opacity: 1;
     }
 
-    .panel.open {
+    .open {
+      flex-grow: 2;
       font-size:40px;
+    }
+    
+    .open p {
+      opacity: 1;
     }
 
     .cta {
@@ -76,7 +95,6 @@
     }
 
   </style>
-
 
   <div class="panels">
     <div class="panel panel1">
@@ -107,10 +125,13 @@
   </div>
 
   <script>
-
+    const panels = document.querySelector('.panels');
+    const items = panels.querySelectorAll('.panel');
+    items.forEach(item => item.addEventListener('click', openItem));
+    function openItem(){
+      this.classList.toggle('open');
+    };
   </script>
-
-
 
 </body>
 </html>
