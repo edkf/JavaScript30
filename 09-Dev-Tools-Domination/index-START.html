@@ -6,7 +6,10 @@
 </head>
 <body>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+  <!-- <p onClick="makeGreen()">×BREAK×DOWN×</p> -->
+	<ul class="repos-list">
+	  
+	</ul>
 
   <script>
     const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
@@ -69,12 +72,17 @@
 		console.count('Ed');
 
     // timing
+    const printRepoList = document.querySelector('.repos-list');
 		console.time('fetching data');
-		fetch('https://api.github.com/users/edkf')
+		fetch('https://api.github.com/users/edkf/repos')
 		.then(data => data.json())
 		.then(data => {
-			console.log(data);
-			console.timeEnd('fetching data');
+			const repoList = data.map(function(repoinfo){ return repoinfo.name});
+      console.log(repoList);
+      repoList.forEach(function(repoItem){
+        // console.log(repoItem);
+        return printRepoList.innerHTML = `<li>${repoItem}<li>`;
+      })
 		})
 		
 		console.table(dogs);
