@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+  <div class="page-content">
+    <span class="welcome-text">Click to start to draw</span>
+    <canvas id="draw" width="800" height="800"></canvas>
+  </div>
+<script>
+
+  // Canvas things
+  const canvas = document.querySelector('#draw');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  // Canvas context things
+  const ctx = canvas.getContext('2d');
+  ctx.strokeStyle = '#BADA55';
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  ctx.lineWidth = 100;
+  
+  // Welcome text things
+  const welcomeText = document.querySelector('.welcome-text');
+  function showCanvas() {
+    welcomeText.style.display = 'none';
+    canvas.style.display = 'block';
+    document.body.style.cursor = 'crosshair';
+  }
+  document.addEventListener('click', showCanvas);
+  
+  // Draw things
+  
+  let isDrawing = true;
+  
+  function draw(e) {
+    if(!isDrawing) return;    
+    console.log(e);
+  }
+  
+  document.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', () => isDrawing = false);
+  canvas.addEventListener('mouseout', () => isDrawing = false);
+  
+</script>
+
+<style>
+
+  html, body {
+    margin:0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #bbb;
+    /*Better rendering fonts*/
+  	-webkit-text-rendering: optimizeLegibility;
+  	-moz-text-rendering: optimizeLegibility;
+  	-ms-text-rendering: optimizeLegibility;
+  	-o-text-rendering: optimizeLegibility;
+  	text-rendering: optimizeLegibility;
+  	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+  }
+  
+  .page-content {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .welcome-text {
+    width: 100%;
+    font-size: 5vh;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  #draw {
+    display: none;
+  }
+  
+</style>
+
+</body>
+</html>
