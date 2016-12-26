@@ -8,12 +8,18 @@
 <body>
 <script>
   const arr = [];
+  const myName = 'edgard';
   function keyPressed(e) {
     arr.push(e.key);
     console.log(arr);
+    if(arr.join('') === myName){
+      alert("Ae porra!");
+    } else {
+      return;
+    }
   }
 
-  document.addEventListener('keydown', keyPressed);
+  document.addEventListener('keyup', keyPressed);
 </script>
 </body>
 </html>
