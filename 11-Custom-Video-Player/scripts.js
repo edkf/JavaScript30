@@ -42,9 +42,21 @@ function scrub(e) {
   video.currentTime = scrubTime;
 }
 
+function fullscreen() {
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.mozRequestFullScreen) {
+    video.mozRequestFullScreen(); // Firefox
+  } else if (video.webkitRequestFullscreen) {
+    video.webkitRequestFullscreen(); // Chrome and Safari
+  }
+};
+
 // Events
 video.addEventListener('click', playPauseVideo);
 toggle.addEventListener('click', playPauseVideo);
+
+video.addEventListener('dblclick', fullscreen);
 
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
