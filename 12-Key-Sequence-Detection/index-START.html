@@ -7,6 +7,13 @@
 </head>
 <body>
 <script>
+  const arr = [];
+  function keyPressed(e) {
+    arr.push(e.key);
+    console.log(arr);
+  }
+
+  document.addEventListener('keydown', keyPressed);
 </script>
 </body>
 </html>
