@@ -28,11 +28,60 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || [];
+
+  function addItem(e) {
+    // Prevent to the browser doenst reload the page
+    e.preventDefault();
+    // select the input
+    const name = (this.querySelector('[name=item]')).value;
+    // create a object with the input value and the checkbox not selected
+    const item = {
+      name: name,
+      done: false
+    }
+    // every time that the user press the button, the information goes to items array
+    items.push(item);
+    populateList(items, itemsList);
+
+    localStorage.setItem('items', JSON.stringify(items));
+
+    // This clear the input after submit the button
+    this.reset();
+    // just show the array items
+    console.table(items);
+  }
+
+  // plates is where we put the data, platesList is
+  function populateList(plates = [], platesList){
+    platesList.innerHTML = plates.map((plate, i) => {
+      return `
+        <li>
+          <input type="checkbox" data-index="${i}" id="item-${i}" ${plate.done ? 'checked' :  ''}/>
+          <label for="item-${i}">${plate.name}</label>
+        </li>
+
+      `
+    }).join('');
+  }
+
+  function toggleDone(e) {
+    if(!e.target.matches('input')){
+      return;
+    } else {
+      const el = e.target;
+      const index = el.dataset.index;
+      items[index].done = !items[index].done;
+      localStorage.setItem('items', JSON.stringify(items));
+      populateList(items, itemsList);
+    }
+  }
+
+  addItems.addEventListener('submit', addItem);
+  itemsList.addEventListener('click', toggleDone);
+
+  populateList(items, itemsList)
 
 </script>
-
-
 </body>
 </html>
-
