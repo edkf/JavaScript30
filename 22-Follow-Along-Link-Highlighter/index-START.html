@@ -24,10 +24,19 @@
       <p>Esse quibusdam, ad, ducimus cupiditate <a href="">nulla</a>, quae magni odit <a href="">totam</a> ut consequatur eveniet sunt quam provident sapiente dicta neque quod.</p>
       <p>Aliquam <a href="">dicta</a> sequi culpa fugiat <a href="">consequuntur</a> pariatur optio ad minima, maxime <a href="">odio</a>, distinctio magni impedit tempore enim repellendus <a href="">repudiandae</a> quas!</p>
     </div>
-
+    <span class="highlight"></span>
   <script>
     // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+		const links	= document.querySelectorAll('a');
+    const span = document.querySelector('span');
+    
+		links.forEach(link => {
+			link.addEventListener('mouseover', function(e) {
+        span.setAttribute('style', `width: ${this.clientWidth}px; height:${this.clientHeight}px; transform: translate(${this.offsetLeft}px, ${this.offsetTop}px);`);
+        console.log(this.getBoundingClientRect());
+				// console.log(this.offsetTop, this.offsetLeft);
+			});
+		})
   </script>
 </body>
 </html>
-
