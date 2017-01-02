@@ -26,15 +26,13 @@
     </div>
     <span class="highlight"></span>
   <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
 		const links	= document.querySelectorAll('a');
     const span = document.querySelector('span');
     
 		links.forEach(link => {
 			link.addEventListener('mouseover', function(e) {
-        span.setAttribute('style', `width: ${this.clientWidth}px; height:${this.clientHeight}px; transform: translate(${this.offsetLeft}px, ${this.offsetTop}px);`);
-        console.log(this.getBoundingClientRect());
-				// console.log(this.offsetTop, this.offsetLeft);
+        const linksCoords = this.getBoundingClientRect();
+        span.setAttribute('style', `width: ${linksCoords.width}px; height:${linksCoords.height}px; transform: translate(${linksCoords.left}px, ${linksCoords.top}px);`);
 			});
 		})
   </script>
